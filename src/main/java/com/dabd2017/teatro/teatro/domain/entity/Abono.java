@@ -13,8 +13,8 @@ public class Abono {
 
 private Integer dni;
 private Integer numero;
-private Date fecha_compra;
-private Date fecha_vencimiento;
-private int cantidad;
+private Date fechaCompra;
+private Date fechaVencimiento;
+private int cantidadUsos;
 
 }
