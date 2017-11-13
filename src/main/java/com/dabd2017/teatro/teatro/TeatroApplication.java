@@ -29,7 +29,7 @@ public class TeatroApplication implements CommandLineRunner{
 		persona.setDireccion("qwe");
 		persona.setTelefono("123");
 
-		//personaDao.insertar(persona);
+		personaDao.insertar(persona);
 
 
 		List<Persona> personas = personaDao.obtenerTodos();
