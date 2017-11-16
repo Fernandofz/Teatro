@@ -11,11 +11,9 @@ import java.util.List;
  * @date 12/11/2017
  */
 public interface AbonoDao {
-
-
-    void insertar(Abono abono) throws SQLException;
+    Abono insertar(Abono abono);
     List<Abono> obtenerTodos();
+    Abono obtenerPorId(int id);
+    Abono actualizar(Abono abono);
     void borrar(Abono abono);
-
-
 }

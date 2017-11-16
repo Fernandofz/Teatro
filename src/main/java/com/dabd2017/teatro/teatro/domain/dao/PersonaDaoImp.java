@@ -4,6 +4,7 @@ import com.dabd2017.teatro.teatro.domain.entity.Persona;
 import com.dabd2017.teatro.teatro.services.DriverDB;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,10 +18,11 @@ public class PersonaDaoImp implements PersonaDao {
 
 
     @Override
-    public void insertar(Persona persona){
+    public Persona insertar(Persona persona){
         JdbcTemplate test = DriverDB.getDriver();
         test.update("INSERT INTO PERSONA (dni,nombre,apellido,direccion,telefono) VALUES(?,?,?,?,?)",
         new Object[] { persona.getDni(),persona.getNombre(), persona.getApellido(), persona.getDireccion(),persona.getTelefono() });
+        return persona;
     }
 
     @Override
@@ -42,7 +44,34 @@ public class PersonaDaoImp implements PersonaDao {
     }
 
     @Override
-    public void borrar(Persona persona) {
+    public Persona obtenerPorId(int id) {
+        JdbcTemplate test = DriverDB.getDriver();
+        SqlRowSet rs = test.queryForRowSet("select * from Persona where id = ?", new Object[]{id});
+        if (rs.next()){
+            Persona persona = new Persona();
+            persona.setDni(rs.getInt("dni"));
+            persona.setNombre(rs.getString("nombre"));
+            persona.setApellido(rs.getString("apellido"));
+            persona.setDireccion(rs.getString("direccion"));
+            persona.setTelefono(rs.getString("telefono"));
+            return persona;
+        }else {
+            return null;
+        }
+    }
 
+    @Override
+    public Persona actualizar(Persona persona) {
+        JdbcTemplate test = DriverDB.getDriver();
+        test.update("UPDATE Persona SET nombre=?,apellido=?,direccion=?,telefono=? WHERE dni=?",
+                new Object[] { persona.getNombre(),persona.getApellido(), persona.getDireccion(), persona.getTelefono(), persona.getDni()});
+        return persona;
+    }
+
+    @Override
+    public void borrar(Persona persona) {
+        JdbcTemplate test = DriverDB.getDriver();
+        test.update("DELETE FROM Persona WHERE dni=?",
+                new Object[] { persona.getDni()});
     }
 }

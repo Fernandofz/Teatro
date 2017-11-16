@@ -16,5 +16,6 @@ private Integer numero;
 private Date fechaCompra;
 private Date fechaVencimiento;
 private int cantidadUsos;
+private int idTipoAbono;
 
 }

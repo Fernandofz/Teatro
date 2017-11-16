@@ -11,8 +11,10 @@ import java.util.List;
  */
 public interface PersonaDao {
 
-    void insertar(Persona persona) throws SQLException;
+    Persona insertar(Persona persona);
     List<Persona> obtenerTodos();
+    Persona obtenerPorId(int id);
+    Persona actualizar(Persona persona);
     void borrar(Persona persona);
 
 }
