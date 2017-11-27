@@ -1,0 +1,56 @@
+<div class="container" style="width:60%">
+    <div>
+         <span style="font-size:30px"> Compañias </span>
+        <br>
+        <input class="btn-busqueda" type="search"  ng-model="compania.nombre" ng-change="compania.refresh();"  name="busqueda" placeholder="Busca una compañia">
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info">Nueva Compañia</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form ng-submit="registrar(user)">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Registrar persona</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span style="color:green">{{msj}}</span>
+                            <input ng-model="user.dni" type="number" placeholder="DNI" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+                            <input ng-model="user.nombre" placeholder="Nombre" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            <input ng-model="user.apellido" placeholder="Apellido" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            <input ng-model="user.direccion" placeholder="Direccion" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+                            <input ng-model="user.telefono" placeholder="Telefono" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" type="submit"> Agregar persona </button>
+                            <button class="btn btn-warning" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
+    </div>
+    <div ng-repeat="compa in compania.companias">
+        <div class="card" style="width: 100%; background-color:rgba(100, 100, 200, 0.4); border-radius:30px">
+            <div class="card-block" style="padding:25px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="card-title">{{compa.nombre}}</h4>
+                        <h5 class="card-title">{{compa.direccion}}</h5>
+                        <h5 class="card-title">Prestigio: {{compa.prestigio}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+    </div>
+
+</div>

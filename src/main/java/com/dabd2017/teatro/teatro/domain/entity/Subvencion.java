@@ -12,8 +12,8 @@ import java.util.Date;
 public class Subvencion {
 
     private Integer idSubvencion;
-    private ObraTeatro obraTeatro;
-    private Organismo organismo;
+    private Integer obraTeatro;
+    private Integer organismo;
     private Float aporte;
     private Date fecha;
 

@@ -19,8 +19,8 @@ public class SubvencionDaoImp implements SubvencioDao {
     @Override
     public Subvencion insertar(Subvencion subvencion){
         JdbcTemplate test = DriverDB.getDriver();
-        test.update("INSERT INTO SUBVENCION (dni,numero,fecha_compra,fecha_vencimiento,cantidad_usos) VALUES(?,?,?,?,?)",
-                new Object[] { subvencion.getDni(),subvencion.getNumero(), subvencion.getFechaCompra(), subvencion.getFechaVencimiento(),subvencion.getCantidadUsos()});
+        test.update("INSERT INTO SUBVENCION (id_obra_teatro,id_organismo,fecha,aporte) VALUES(?,?,?,?)",
+                new Object[] { subvencion.getObraTeatro(),subvencion.getOrganismo(), subvencion.getFecha(), subvencion.getAporte()});
         return subvencion;
     }
 
@@ -33,12 +33,11 @@ public class SubvencionDaoImp implements SubvencioDao {
     private static final class PersonaMapper implements RowMapper {
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
             Subvencion subvencion = new Subvencion();
-            subvencion.setDni(rs.getInt("dni"));
-            subvencion.setNumero(rs.getInt("numero"));
-            subvencion.setFechaVencimiento(rs.getDate("fecha_vencimiento"));
-            subvencion.setFechaCompra(rs.getDate("fecha_compra"));
-            subvencion.setCantidadUsos(rs.getInt("cantidad_usos"));
-            subvencion.setIdTipoSubvencion(rs.getInt("id_tipo_subvencion"));
+            subvencion.setIdSubvencion(rs.getInt("id_subvencion"));
+            subvencion.setObraTeatro(rs.getInt("id_obra_teatro"));
+            subvencion.setOrganismo(rs.getInt("id_organismo"));
+            subvencion.setFecha(rs.getDate("fecha"));
+            subvencion.setAporte(rs.getFloat("aporte"));
             return subvencion;
         }
     }
@@ -49,12 +48,11 @@ public class SubvencionDaoImp implements SubvencioDao {
         SqlRowSet rs = test.queryForRowSet("select * from Subvencion where id = ?", new Object[]{id});
         if (rs.next()){
             Subvencion subvencion = new Subvencion();
-            subvencion.setDni(rs.getInt("dni"));
-            subvencion.setNumero(rs.getInt("numero"));
-            subvencion.setFechaVencimiento(rs.getDate("fecha_vencimiento"));
-            subvencion.setFechaCompra(rs.getDate("fecha_compra"));
-            subvencion.setCantidadUsos(rs.getInt("cantidad_usos"));
-            subvencion.setIdTipoSubvencion(rs.getInt("id_tipo_subvencion"));
+            subvencion.setIdSubvencion(rs.getInt("id_subvencion"));
+            subvencion.setObraTeatro(rs.getInt("id_obra_teatro"));
+            subvencion.setOrganismo(rs.getInt("id_organismo"));
+            subvencion.setFecha(rs.getDate("fecha"));
+            subvencion.setAporte(rs.getFloat("aporte"));
             return subvencion;
         }else {
             return null;
@@ -62,18 +60,10 @@ public class SubvencionDaoImp implements SubvencioDao {
     }
 
     @Override
-    public Subvencion actualizar(Subvencion subvencion) {
-        JdbcTemplate test = DriverDB.getDriver();
-        test.update("UPDATE SUBVENCION SET numero=?,fecha_compra=?,fecha_vencimiento=?,cantidad_usos=? WHERE dni=? AND numero=?",
-                new Object[] {subvencion.getFechaCompra(), subvencion.getFechaVencimiento(),subvencion.getCantidadUsos(),subvencion.getDni(),subvencion.getNumero()});
-        return subvencion;
-    }
-
-    @Override
     public void borrar(Subvencion subvencion) {
         JdbcTemplate test = DriverDB.getDriver();
-        test.update("DELETE FROM SUBVENCION WHERE dni=? AND numero=?",
-                new Object[] { subvencion.getDni(), subvencion.getNumero()});
+        test.update("DELETE FROM SUBVENCION WHERE id_subvencion=? AND id_obra_teatro=? AND id_organismo=?",
+                new Object[] { subvencion.getIdSubvencion(), subvencion.getObraTeatro(),subvencion.getOrganismo()});
     }
     
 }

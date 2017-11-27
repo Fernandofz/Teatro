@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface PersonaDao {
 
+    Integer obtenerMaxAutoId();
     Persona insertar(Persona persona);
     List<Persona> obtenerTodos();
     Persona obtenerPorId(int id);

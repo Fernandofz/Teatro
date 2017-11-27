@@ -18,6 +18,17 @@ public class PersonaDaoImp implements PersonaDao {
 
 
     @Override
+    public Integer obtenerMaxAutoId() {
+        JdbcTemplate test = DriverDB.getDriver();
+        SqlRowSet rs = test.queryForRowSet("select max(dni) as dni from Persona where dni < 20000");
+        if (rs.next()){
+            return rs.getInt("dni");
+        }else {
+            return null;
+        }
+    }
+
+    @Override
     public Persona insertar(Persona persona){
         JdbcTemplate test = DriverDB.getDriver();
         test.update("INSERT INTO PERSONA (dni,nombre,apellido,direccion,telefono) VALUES(?,?,?,?,?)",

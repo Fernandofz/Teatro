@@ -12,29 +12,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
 
 @SpringBootApplication
-public class TeatroApplication implements CommandLineRunner{
+public class TeatroApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(TeatroApplication.class, args);
 	}
 
-	@Override
-	public void run(String... strings) throws Exception {
-		PersonaDao personaDao = new PersonaDaoImp();
 
-		Persona persona = new Persona();
-		persona.setDni(200);
-		persona.setNombre("asd");
-		persona.setApellido("asd");
-		persona.setDireccion("qwe");
-		persona.setTelefono("123");
-
-		personaDao.insertar(persona);
-
-
-		List<Persona> personas = personaDao.obtenerTodos();
-
-		System.out.println(personas.size());
-		System.out.println(personas.get(0).getDni());
-	}
 }

@@ -1,0 +1,105 @@
+<div class="container" style="width:60%">
+    <div>
+         <span style="font-size:30px"> Obras de teatro </span>
+        <br>
+        <input class="btn-busqueda" type="search"  ng-model="obras.nombre" ng-change="obras.refresh();"  name="busqueda" placeholder="Busca una obra">
+        <a href="/#!/crearobra" class="btn btn-warning">Nueva obra</a>
+        <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
+    </div>
+    <div ng-repeat="obra in obras.obras">
+
+
+        <div class="card" style="width: 100%; background-color:rgba(154, 100, 100, 0.4); border-radius:30px">
+            <div class="card-block" style="padding:25px">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="card-img-top" style="width:128px;height:128px;" src="{{obra.image}}" alt="Card image cap">
+                    </div>
+                    <div class="col-md-9">
+                        <h4 class="card-title">{{obra.titulo}}</h4>
+                        <h5 class="card-title">{{obra.anio}}</h5>
+                        <h5 class="card-title">Genero: {{obra.genero}}</h5>
+                        <p class="card-text">{{obra.descripcion}}{{obra.com}}</p>
+
+                    </div>
+                </div>
+                <div class="row" ng-if="obras.check(obra.id_obra_teatro) || obra.es_tercera == true">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-2">
+                        <a class="btn btn-danger">Vender</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a  class="btn btn-warning">Comprar</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a  class="btn btn-primary" ng-click="obras.idselected = obra.id_obra_teatro" data-toggle="modal" data-target="#myModal">Representar</a>
+                    </div>
+                </div>
+                <div class="row" ng-if="!(obras.check(obra.id_obra_teatro)) && obra.es_tercera == false ">
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
+                        <a class="btn btn-primary" ng-click="obras.idselected = obra.id_obra_teatro" data-toggle="modal" data-target="#myModal">Representar</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+    </div>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form ng-submit="registrar(user)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Representar obra localmente</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <input ng-model="obras.fecharep" type="datetime-local" placeholder="Titulo" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                        <input ng-model="obras.cantb" placeholder="Cantidad de butacas" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required type="number">
+                        <hr>
+                        <h4 class="modal-title">Espectadores</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input ng-model="obras.esp1"  placeholder="Espectador 1" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input ng-model="obras.esp1p" type="number" placeholder="Precio" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input ng-model="obras.esp2"  placeholder="Espectador 2" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input ng-model="obras.esp2p" type="number" placeholder="Precio" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input ng-model="obras.esp3"  placeholder="Espectador 3" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input ng-model="obras.esp3p" type="number" placeholder="Precio" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button ng-click="obras.representar();" class="btn btn-warning" class="btn btn-default" data-dismiss="modal">Representar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>

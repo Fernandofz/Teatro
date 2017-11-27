@@ -12,7 +12,11 @@ public class ObraTeatro {
     private Integer idObraTeatro;
     private Integer año;
     private String titulo;
+    private Integer dniAutor;
+    private String nacionalidad;
     private String genero;
+    private String descripcion;
+    private Boolean esTercera;
     private String image;
 
 }

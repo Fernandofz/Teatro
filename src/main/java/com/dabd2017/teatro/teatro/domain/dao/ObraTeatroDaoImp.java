@@ -19,8 +19,8 @@ public class ObraTeatroDaoImp implements ObraTeatroDao {
     @Override
     public ObraTeatro insertar(ObraTeatro obraTeatro){
         JdbcTemplate test = DriverDB.getDriver();
-        test.update("INSERT INTO ObraTeatro (titulo,genero,año,image) VALUES(?,?,?,?)",
-                new Object[] { obraTeatro.getTitulo(),obraTeatro.getGenero(), obraTeatro.getAño(), obraTeatro.getImage()});
+        test.update("INSERT INTO ObraTeatro (titulo,genero,año,descripcion,image,dni_autor,nacionalidad,es_tercera) VALUES(?,?,?,?,?,?,?,?)",
+                new Object[] { obraTeatro.getTitulo(),obraTeatro.getGenero(), obraTeatro.getAño(),obraTeatro.getDescripcion(), obraTeatro.getImage(),obraTeatro.getDniAutor(),obraTeatro.getNacionalidad(),obraTeatro.getEsTercera()});
         return obraTeatro;
     }
 
@@ -36,6 +36,8 @@ public class ObraTeatroDaoImp implements ObraTeatroDao {
             obraTeatro.setIdObraTeatro(rs.getInt("id_obra_teatro"));
             obraTeatro.setTitulo(rs.getString("titulo"));
             obraTeatro.setGenero(rs.getString("genero"));
+            obraTeatro.setGenero(rs.getString("descripcion"));
+            obraTeatro.setEsTercera(rs.getBoolean("es_tercera"));
             obraTeatro.setAño(rs.getInt("año"));
             obraTeatro.setImage(rs.getString("image"));
             return obraTeatro;

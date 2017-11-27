@@ -1,0 +1,80 @@
+<div class="container" style="width:60%">
+    <div>
+        <span style="font-size:30px"> Total Ingresos: $ {{estadistica.totalingresos}} </span>
+        <br>
+        <span style="font-size:20px"> Total Egresos: $ {{estadistica.totalegresos}} </span>
+        <br>
+        <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
+        <span style="font-size:20px"> Ingresos por ventas: $ {{estadistica.ingresosporventas}}</span>
+        <br>
+        <span style="font-size:18px"> Ingresos por entradas: $ {{estadistica.ingresosporentradas}}</span>
+        <br>
+        <span style="font-size:18px"> Ingresos por subvenciones: $ {{estadistica.ingresosporsubvencion}}</span>
+        <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
+        <div>
+            <span style="font-size:30px"> Obras de teatro </span>
+            <br>
+            <input class="btn-busqueda" type="search"  ng-model="estadistica.nombre" ng-change="estadistica.refresh();"  name="busqueda" placeholder="Busca una obra">
+            <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
+        </div>
+        <div ng-repeat="obra in estadistica.obras">
+
+
+            <div class="card" style="width: 100%; background-color:rgba(154, 100, 100, 0.4); border-radius:30px">
+                <div class="card-block" style="padding:25px">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="card-img-top" style="width:128px;height:128px;" src="{{obra.image}}" alt="Card image cap">
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="card-title">{{obra.titulo}}</h4>
+                            <h5 class="card-title">{{obra.anio}}</h5>
+                            <h5 class="card-title">Genero: {{obra.genero}}</h5>
+                            <p class="card-text">{{obra.descripcion}}{{obra.com}}</p>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9"></div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary" ng-click="estadistica.obraid = obra.id_obra_teatro;estadistica.nombreobra = obra.titulo; estadistica.ingresosporobras();estadistica.egresosporobras();" data-toggle="modal" data-target="#myModal">Ingreso Egreso</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+
+        </div>
+
+
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form ng-submit="registrar(user)">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Estadisticas de {{estadistica.nombreobra}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-size:30px"> Total Ingresos: $ {{estadistica.totalingresosporobra}} </span>
+                            <br>
+                            <span style="font-size:20px"> Total Egresos: $ {{estadistica.totalegresosporobra}} </span>
+                            <br>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button class="btn btn-warning" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

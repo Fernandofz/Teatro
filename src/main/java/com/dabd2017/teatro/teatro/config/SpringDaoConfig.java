@@ -16,4 +16,5 @@ public class SpringDaoConfig {
     public PersonaDao personaDao(){
         return new PersonaDaoImp();
     }
+
 }

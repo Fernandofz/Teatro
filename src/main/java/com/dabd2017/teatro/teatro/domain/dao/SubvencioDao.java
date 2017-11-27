@@ -13,7 +13,6 @@ public interface SubvencioDao {
     Subvencion insertar(Subvencion subvencion);
     List<Subvencion> obtenerTodos();
     Subvencion obtenerPorId(int id);
-    Subvencion actualizar(Subvencion subvencion);
     void borrar(Subvencion subvencion);
 
 

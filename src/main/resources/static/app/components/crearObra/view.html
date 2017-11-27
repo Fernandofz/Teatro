@@ -1,0 +1,84 @@
+<div class="body-center container" style="width:60%">
+    <h1>Agregar una obra de teatro</h1>
+    <hr>
+
+    <div class="row row-home">
+        <form ng-submit="postear(obra)">
+            <input ng-model="obra.titulo" placeholder="Titulo" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+            <input ng-model="obra.anio" placeholder="Año" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required type="number">
+            <input ng-model="obra.genero" placeholder="Generos" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+            <input ng-model="obra.descripcion" placeholder="Descripcion" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+            <input ng-model="obra.nacionalidad" placeholder="Nacionalidad" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+            <input ng-model="obra.image" placeholder="URL imagen" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required><br>
+            <Label style="font-size: 20px;">Tercera: </Label><input type="checkbox" ng-model="obra.esTercera" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+            <hr>
+            <h3 ng-if="crearobra.nautor != undefined"> Autor seleccionado: {{crearobra.nautor + ' ' + crearobra.aautor}}</h3>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Seleccionar Autor</button>
+
+            <!-- Modal -->
+            <div id="myModal1" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Seleccionar autor</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input class="btn-busqueda" type="search"  ng-model="crearobra.nombre" ng-change="crearobra.personas();"  name="busqueda" placeholder="Busca un autor">
+                                <div ng-repeat="autor in crearobra.autores">
+                                    <div class="row">
+
+                                        <div class="col-md-3">{{autor.dni}}</div>
+                                        <div class="col-md-3">{{autor.nombre}}</div>
+                                        <div class="col-md-3">{{autor.apellido}}</div>
+                                        <div class="col-md-3"><button type="button" ng-click="crearobra.nautor = autor.nombre; crearobra.aautor = autor.apellido; crearobra.dni = autor.dni" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Seleccionar</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <button class="btn btn-warning" type="submit"> Crear obra </button>
+        </form>
+        <hr>
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Nuevo autor</button>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <form ng-submit="registrar(user)">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Registrar autor</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span style="color:green">{{msj}}</span>
+                            <input ng-model="user.dni" type="number" placeholder="DNI" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+                            <input ng-model="user.nombre" placeholder="Nombre" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            <input ng-model="user.apellido" placeholder="Apellido" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            <input ng-model="user.direccion" placeholder="Direccion" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+                            <input ng-model="user.telefono" placeholder="Telefono" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" type="submit"> Agregar Autor </button>
+                            <button class="btn btn-warning" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+    </div>
+</div>
+

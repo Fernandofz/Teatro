@@ -1,0 +1,125 @@
+<div class="container" style="width:60%">
+    <div>
+        <span style="font-size:30px"> Entradas  {{venderentrada.asd}}</span>
+        <br>
+        <input class="btn-busqueda" type="search"  ng-model="venderentrada.nombre" ng-change="venderentrada.refresh();"  name="busqueda" placeholder="Busca una butaca">
+        <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
+    </div>
+    <div ng-repeat="entrada in venderentrada.entradas">
+
+
+        <div class="card col-md-3" style="margin-left:1em;margin-bottom:1em;width: 30%; background-color:rgba(100, 100, 100, 0.4); border-radius:5px">
+            <div class="card-block" style="padding:25px">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4 class="card-title">Butaca: {{entrada.butaca}}</h4>
+                        <h5 class="card-title">Ocupado: {{entrada.esta_ocupado == 1 ? 'si' : 'no'}}</h5>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div ng-if="entrada.esta_ocupado == false">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-4">
+                            <a ng-click="venderentrada.butaca = entrada.butaca" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">Abonar</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-danger" ng-click="venderentrada.butaca = entrada.butaca" data-toggle="modal" data-target="#myModal2">Vender</a>
+                        </div>
+                    </div>
+                    <div ng-if="entrada.esta_ocupado == true">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#" class="btn btn-success">Ver</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div id="myModal1" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Seleccionar abono</h4>
+                </div>
+                <div class="modal-body">
+                    <input class="btn-busqueda" type="search"  ng-model="venderentrada.nombreabonado" ng-change="venderentrada.personas();"  name="busqueda" placeholder="Busca un abonado">
+                    <select name="singleSelect" id="singleSelect" ng-model="venderentrada.tipoespect">
+                        <option value="">Seleccione espectador</option>
+
+                        <option ng-repeat="especta in venderentrada.espectadores" value="{{especta.id_espectador}}">{{especta.tipo}}</option>
+
+                    </select><br>
+
+                    <div ng-repeat="abonado in venderentrada.abonados">
+                        <div class="row">
+                            <div class="col-md-3">{{abonado.dni}}</div>
+                            <div class="col-md-3">{{abonado.nombre}}</div>
+                            <div class="col-md-3">{{abonado.apellido}}</div>
+                            <div class="col-md-3"><button type="button" ng-click="venderentrada.personaabonada = abonado.dni; venderentrada.nabono = abonado.numero; venderentrada.abonar()" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Seleccionar</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Seleccionar cliente</h4>
+                </div>
+                <div class="modal-body">
+                    <input class="btn-busqueda" type="search"  ng-model="venderentrada.nombreindividual" ng-change="venderentrada.obtenerComp();"  name="busqueda" placeholder="Busca un individuo">
+                    <select name="singleSelect1" id="singleSelect1" ng-model="venderentrada.tipoespect">
+                        <option value="">Seleccione espectador</option>
+
+                        <option ng-repeat="especta in venderentrada.espectadores" value="{{especta.id_espectador}}">{{especta.tipo}} ${{especta.precio}}</option>
+
+                    </select><br>
+
+                    <div ng-repeat="individual in venderentrada.individuales">
+                        <div class="row">
+                            <div class="col-md-3">{{individual.dni}}</div>
+                            <div class="col-md-3">{{individual.nombre}}</div>
+                            <div class="col-md-3">{{individual.apellido}}</div>
+                            <div class="col-md-3"><button type="button" ng-click="venderentrada.personaabonada = individual.dni; venderentrada.vender()" class="btn btn-success" data-toggle="modal" data-target="#myModal2">Vender</button></div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-3">
+                            <div class="col-md-3"><button type="button" ng-click="venderentrada.venderI()" class="btn btn-dark" data-toggle="modal" data-target="#myModal2">Venta anonima</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

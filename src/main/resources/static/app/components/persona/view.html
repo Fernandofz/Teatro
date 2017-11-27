@@ -1,0 +1,94 @@
+<div class="container" style="width:60%">
+    <div>
+        <span style="font-size:30px"> Personas </span>
+        <br>
+        <input class="btn-busqueda" type="search"  ng-model="persona.nombre" ng-change="persona.refresh();"  name="busqueda" placeholder="Busca una persona">
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Nueva persona</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form ng-submit="registrar(user)">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Registrar persona</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span style="color:green">{{msj}}</span>
+                            <input ng-model="user.dni" type="number" placeholder="DNI" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+                            <input ng-model="user.nombre" placeholder="Nombre" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            <input ng-model="user.apellido" placeholder="Apellido" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
+                            <input ng-model="user.direccion" placeholder="Direccion" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+                            <input ng-model="user.telefono" placeholder="Telefono" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" type="submit"> Agregar persona </button>
+                            <button class="btn btn-warning" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
+    </div>
+    <div ng-repeat="person in persona.personas">
+
+
+        <div class="card col-md-3" style="margin-left:1em;margin-bottom:1em;width: 30%; background-color:rgba(100, 100, 100, 0.4); border-radius:5px">
+            <div class="card-block" style="padding:25px">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4 class="card-title">{{person.nombre}}</h4>
+                        <h5 class="card-title">{{person.apellido}}</h5>
+                        <h5 class="card-title">{{person.dni}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-4">
+                        <button ng-click="persona.abonar = person.dni" type="button"  class="btn btn-danger" data-toggle="modal" data-target="#myModal1">Abonar</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="myModal1" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Seleccionar tipo abono</h4>
+                    <input ng-model="dias" type="number" placeholder="Cantidad de dias vigente" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;">
+                </div>
+                <div class="modal-body">
+                    <div ng-repeat="abono in persona.abonos">
+                        <div class="row">
+                            <div class="col-md-3">{{abono.nombre}}</div>
+                            <div class="col-md-3">usos: {{abono.cantidadUsos > 365 ? 'unlimit' : abono.cantidadUsos}}</div>
+                            <div class="col-md-3">${{abono.precio}}</div>
+                            <div class="col-md-3"><button type="button" ng-click="persona.registrarAbono(abono.idTipoAbono,abono.cantidadUsos);" class="btn btn-success">Seleccionar</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

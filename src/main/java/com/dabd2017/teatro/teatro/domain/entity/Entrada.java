@@ -11,11 +11,13 @@ import java.util.Date;
 @Data
 public class Entrada {
 
-    private int numero;
-    private int butaca;
+    private Integer idRepresentacion;
+    private Integer butaca;
     private Date fecha;
-    private String espectador;
-    private int dni;
-    private int numeroAbnono;
-    private int idRepresntacion;
+    private Integer espectador;
+    private Integer dni;
+    private Integer numeroAbono;
+    private Integer dniIndividual;
+    private Boolean ocupado;
+
 }

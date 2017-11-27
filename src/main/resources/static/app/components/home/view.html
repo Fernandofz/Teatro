@@ -1,13 +1,42 @@
-<div class="body-center container-fluid">
-    <div class="row row-home">
-        <form ng-submit="signUp(user)">
-        <input type="number" ng-model="user.dni" placeholder="DNI" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
-        <input ng-model="user.nombre" placeholder="Nombre" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
-            <input ng-model="user.apellido" placeholder="Apellido" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
-            <input ng-model="user.telefono" placeholder="Telefono" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
-            <input ng-model="user.direccion" placeholder="Direccion" style="width: 90%; height: 40px; font-size: 20px; border:2px solid; border-color:gray;" required>
-            <br>
-            <button type="submit"></button>
-        </form>
+<div class="container" style="width:60%">
+    <div>
+         <span style="font-size:30px"> Proximos espectaculos </span>
+        <hr style="	height: 20px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset;">
     </div>
+    <div ng-repeat="espectaculo in home.espectaculos">
+
+
+        <div class="card" style="width: 100%; background-color:rgba(154, 100, 100, 0.4); border-radius:30px">
+            <div class="card-block" style="padding:25px">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="card-img-top" style="width:128px;height:128px;" src="{{espectaculo.image}}" alt="Card image cap">
+                    </div>
+                    <div class="col-md-9">
+                        <h4 class="card-title">{{espectaculo.titulo}}</h4>
+                        <h5 class="card-title">{{espectaculo.fecha_obra}}</h5>
+                        <h5 class="card-title">Genero: {{espectaculo.genero}}</h5>
+                        <p class="card-text">{{espectaculo.descripcion}}</p>
+                        <h5 class="card-title">Teatro: {{espectaculo.nombre}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-3">
+                        <a class="btn btn-danger">Registrar Gastos</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-success">Reparto</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/#!/entradas/{{espectaculo.id_representacion}}" class="btn btn-primary">Vender Entrada</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+    </div>
+
 </div>

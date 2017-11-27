@@ -19,8 +19,8 @@ public class AbonoDaoImp implements AbonoDao {
     @Override
     public Abono insertar(Abono abono){
         JdbcTemplate test = DriverDB.getDriver();
-        test.update("INSERT INTO ABONO (dni,numero,fecha_compra,fecha_vencimiento,cantidad_usos) VALUES(?,?,?,?,?)",
-        new Object[] { abono.getDni(),abono.getNumero(), abono.getFechaCompra(), abono.getFechaVencimiento(),abono.getCantidadUsos()});
+        test.update("INSERT INTO ABONO (dni,numero,fecha_compra,fecha_vencimiento,cantidad_usos,id_tipo_abono) VALUES(?,?,?,?,?,?)",
+        new Object[] { abono.getDni(),abono.getNumero(), abono.getFechaCompra(), abono.getFechaVencimiento(),abono.getCantidadUsos(),abono.getIdTipoAbono()});
         return abono;
     }
 

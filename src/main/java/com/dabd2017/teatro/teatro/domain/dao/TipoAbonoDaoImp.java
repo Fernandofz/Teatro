@@ -34,9 +34,9 @@ public class TipoAbonoDaoImp implements TipoAbonoDao {
     private static final class PersonaMapper implements RowMapper {
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
             TipoAbono tipoAbono = new TipoAbono();
-            tipoAbono.setIdTipoAbono(rs.getInt("id_tipoAbono"));
+            tipoAbono.setIdTipoAbono(rs.getInt("id_tipo_abono"));
             tipoAbono.setNombre(rs.getString("nombre"));
-            tipoAbono.setCantidadUsos(rs.getInt("Cantidad"));
+            tipoAbono.setCantidadUsos(rs.getInt("cantidad"));
             tipoAbono.setPrecio(rs.getFloat("precio"));
             return tipoAbono;
         }
@@ -48,9 +48,9 @@ public class TipoAbonoDaoImp implements TipoAbonoDao {
         SqlRowSet rs = test.queryForRowSet("select * from TipoAbono where id = ?", new Object[]{id});
         if (rs.next()){
             TipoAbono tipoAbono = new TipoAbono();
-            tipoAbono.setIdTipoAbono(rs.getInt("id_tipoAbono"));
+            tipoAbono.setIdTipoAbono(rs.getInt("id_tipo_abono"));
             tipoAbono.setNombre(rs.getString("nombre"));
-            tipoAbono.setCantidadUsos(rs.getInt("Cantidad"));
+            tipoAbono.setCantidadUsos(rs.getInt("cantidad"));
             tipoAbono.setPrecio(rs.getFloat("precio"));
             return tipoAbono;
         }else {
